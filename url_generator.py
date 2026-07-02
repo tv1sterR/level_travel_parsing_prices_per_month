@@ -1,49 +1,31 @@
-from datetime import datetime
-from datetime import timedelta
-from urllib.parse import (
-    urlparse,
-    parse_qs,
-    urlencode,
-    urlunparse
-)
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 
-def generate_month_urls(base_url: str):
+def generate_month_urls(base_url: str, dates: list[str]):
+    """
+    Генерирует список URL с подстановкой разных start_date
+    """
 
     parsed = urlparse(base_url)
-
     query = parse_qs(parsed.query)
-
-    start_date = query["start_date"][0]
-
-    dt = datetime.strptime(
-        start_date,
-        "%Y-%m-%d"
-    )
-
-    first_day = dt.replace(day=1)
 
     urls = []
 
-    current = first_day
+    for date in dates:
 
-    while current.month == dt.month:
+        # копируем query, чтобы не мутировать оригинал
+        new_query = query.copy()
 
-        query["start_date"] = [
-            current.strftime("%Y-%m-%d")
-        ]
+        # подставляем дату
+        new_query["start_date"] = [date]
 
-        new_query = urlencode(
-            query,
-            doseq=True
-        )
+        # собираем URL обратно
+        encoded_query = urlencode(new_query, doseq=True)
 
         new_url = urlunparse(
-            parsed._replace(query=new_query)
+            parsed._replace(query=encoded_query)
         )
 
         urls.append(new_url)
-
-        current += timedelta(days=1)
 
     return urls
