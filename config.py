@@ -2,5 +2,5 @@ TOUR_URL = "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date
 
 HEADLESS = False
 
-TELEGRAM_TOKEN = "8618673750:AAGOz_5tR8qLDIImCfXGCqMXn81pf2EhAuA"
-TELEGRAM_CHAT_ID = "813799519"
+TELEGRAM_TOKEN = "..."
+TELEGRAM_CHAT_ID = "..."
