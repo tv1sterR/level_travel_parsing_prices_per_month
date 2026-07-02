@@ -1,104 +1,137 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
+import time
+import traceback
+from urllib.parse import urlparse, parse_qs
 
 from config import TOUR_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 from url_generator import generate_month_urls
 from parser import get_month_prices
 
-from prices_json import save_prices, load_prices, compare_prices
+from prices_json import save_history, compare_with_last
+from graph import save_price_chart
 from telegram import TelegramNotifier
 
 
 def input_date(prompt):
     while True:
         try:
-            date_str = input(prompt + " (YYYY-MM-DD): ").strip()
-            return datetime.strptime(date_str, "%Y-%m-%d").date()
+            return datetime.strptime(
+                input(prompt + " (YYYY-MM-DD): ").strip(),
+                "%Y-%m-%d"
+            ).date()
         except ValueError:
-            print("❌ Неверный формат даты. Пример: 2026-07-01")
+            print("❌ Неверный формат даты")
 
 
-def generate_dates(start_date, end_date):
+def generate_dates(start, end):
     dates = []
-    current = start_date
+    cur = start
 
-    while current <= end_date:
-        dates.append(current.strftime("%Y-%m-%d"))
-        current += timedelta(days=1)
+    while cur <= end:
+        dates.append(cur.strftime("%Y-%m-%d"))
+        cur += timedelta(days=1)
 
     return dates
 
 
-def main():
+def extract_base_date(url: str):
+    parsed = urlparse(url)
+    query = parse_qs(parsed.query)
 
-    print("\n🚀 Level Travel мониторинг цен\n")
+    if "start_date" not in query:
+        raise ValueError("В URL нет start_date")
 
-    # ввод диапазона дат
-    start_date = input_date("Введите дату С")
-    end_date = input_date("Введите дату ПО")
+    return datetime.strptime(query["start_date"][0], "%Y-%m-%d").date()
 
-    if end_date < start_date:
-        print("❌ Ошибка: дата 'по' меньше даты 'с'")
-        return
 
-    print(f"\n📅 Период: {start_date} → {end_date}")
+def run_cycle(bot, start, end):
 
-    # генерация дат
-    dates = generate_dates(start_date, end_date)
-
-    # генерация URL
+    dates = generate_dates(start, end)
     urls = generate_month_urls(TOUR_URL, dates)
 
-    print(f"\n🔎 Всего проверок: {len(urls)}")
+    print(f"\n🔎 Проверяем: {len(urls)} дат")
 
-    # парсинг
     prices = get_month_prices(urls)
-
-    print("\n========================")
-    print("РЕЗУЛЬТАТ")
-    print("========================")
 
     if not prices:
         print("❌ Нет данных")
+        bot.send_message("❌ Нет данных по турам")
         return
 
-    for item in prices:
-        print(f"{item['date']} | {item['price']} ₽ | {item['url']}")
+    prices = sorted(prices, key=lambda x: x["price"])
+    best = prices[0]
 
-    # лучшая цена сейчас
-    best = min(prices, key=lambda x: x["price"])
+    print("\n📊 РЕЗУЛЬТАТ:")
+    for p in prices:
+        print(f"{p['date']} | {p['price']} ₽")
 
-    print("\n========================")
-    print("МИНИМАЛЬНАЯ ЦЕНА")
-    print("========================")
-
+    print("\n🔥 МИНИМУМ:")
     print(f"{best['date']} | {best['price']} ₽")
-    print(best["url"])
 
-    # загрузка старых данных (защита от кривого JSON)
-    old_prices = load_prices()
+    save_history(prices)
+    changes = compare_with_last(prices)
 
-    if isinstance(old_prices, str):
-        old_prices = []
+    bot.send_full_report(prices, best)
 
-    # сравнение
-    compare_prices(old_prices, prices)
+    if changes:
+        msg = "📉 <b>Изменения цен</b>\n\n"
+        for c in changes:
+            msg += f"{c['date']}: {c['old']} → {c['new']} ({c['diff']:+})\n"
+        bot.send_message(msg)
 
-    # сохранение новых данных
-    save_prices(prices)
+    chart_file = save_price_chart(prices)
 
-    # Telegram уведомления
+    if chart_file:
+        print("📈 График создан:", chart_file)
+        bot.send_photo(chart_file, caption="📊 График цен по датам")
+
+
+def main(auto=True):
+
+    print("\n🚀 Level Travel мониторинг\n")
+
     bot = TelegramNotifier(TELEGRAM_TOKEN, TELEGRAM_CHAT_ID)
 
-    old_best = None
+    # ===== AUTO MODE =====
+    if auto:
 
-    if old_prices:
-        try:
-            old_best = min(old_prices, key=lambda x: x["price"])
-        except Exception:
-            old_best = None
+        base_date = extract_base_date(TOUR_URL)
 
-    bot.send_price_report(prices, best, old_best)
+        start = base_date - timedelta(days=5)
+        end = base_date + timedelta(days=5)
+
+        print(f"🤖 AUTO режим включён")
+        print(f"📅 Базовая дата тура: {base_date}")
+        print(f"📅 Окно поиска: {start} → {end}")
+
+        while True:
+            try:
+                print("\n==============================")
+                print(f"⏱ Запуск: {datetime.now()}")
+                print("==============================")
+
+                run_cycle(bot, start, end)
+
+            except Exception as e:
+                print("❌ Ошибка:", e)
+                traceback.print_exc()
+                bot.send_message(f"❌ Ошибка:\n{e}")
+
+            print("\n⏳ Ждём 40 минут...\n")
+            time.sleep(40 * 60)
+
+    # ===== MANUAL MODE =====
+    else:
+
+        start = input_date("Дата С")
+        end = input_date("Дата ПО")
+
+        if end < start:
+            print("❌ Ошибка: дата ПО меньше даты С")
+            return
+
+        run_cycle(bot, start, end)
 
 
 if __name__ == "__main__":
-    main()
+    main(auto=True)

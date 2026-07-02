@@ -1,12 +1,7 @@
 [
   {
-    "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-17&nights=7&search_type=package&adults=2&from=Moscow-RU",
-    "price": 289286,
-    "date": "2026-07-17"
-  },
-  {
     "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
-    "price": 311868,
+    "price": 305579,
     "date": "2026-07-18"
   },
   {
@@ -23,5 +18,365 @@
     "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
     "price": 282630,
     "date": "2026-07-21"
+  },
+  {
+    "timestamp": "2026-07-02T17:19:03.901743",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T17:24:51.303317",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T17:29:27.138500",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T17:36:51.160665",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T17:40:33.690985",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T17:58:18.151777",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-02-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 335204,
+        "date": "2026-02-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-02-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 335204,
+        "date": "2026-02-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-02-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 335204,
+        "date": "2026-02-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-02-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 335204,
+        "date": "2026-02-21"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-02-22&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 335204,
+        "date": "2026-02-22"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T18:00:14.456791",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T18:21:37.372333",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 289331,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-24&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 292896,
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-23&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 296520,
+        "date": "2026-07-23"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-25&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 298331,
+        "date": "2026-07-25"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-17&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 301955,
+        "date": "2026-07-17"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 305579,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 309093,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 339911,
+        "date": "2026-07-21"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-15&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 340069,
+        "date": "2026-07-15"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-16&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 340910,
+        "date": "2026-07-16"
+      },
+      {
+        "url": "https://level.travel/hotels/9022465-Rixos_Premium_Seagate?start_date=2026-07-22&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 343635,
+        "date": "2026-07-22"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T19:06:51.976494",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-25&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 181163,
+        "date": "2026-07-25"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-24&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 192539,
+        "date": "2026-07-24"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-26&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 193487,
+        "date": "2026-07-26"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 194435,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 194435,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-23&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 195383,
+        "date": "2026-07-23"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 198519,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-17&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 200123,
+        "date": "2026-07-17"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-27&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 202019,
+        "date": "2026-07-27"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-22&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 206971,
+        "date": "2026-07-22"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 210974,
+        "date": "2026-07-21"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T19:48:33.696920",
+    "prices": [
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-26&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 193487,
+        "date": "2026-07-26"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-19&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 194435,
+        "date": "2026-07-19"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-20&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 194435,
+        "date": "2026-07-20"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-23&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 195383,
+        "date": "2026-07-23"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-17&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 200123,
+        "date": "2026-07-17"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-27&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 202019,
+        "date": "2026-07-27"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-18&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 205992,
+        "date": "2026-07-18"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-22&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 206969,
+        "date": "2026-07-22"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-25&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 207708,
+        "date": "2026-07-25"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-21&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 210972,
+        "date": "2026-07-21"
+      },
+      {
+        "url": "https://level.travel/hotels/15568-Labranda_Mares_Marmaris_Ex_Grand_Yazici_Mares_Hotel?ref_content=wishlist&start_date=2026-07-24&nights=7&search_type=package&adults=2&from=Moscow-RU",
+        "price": 214061,
+        "date": "2026-07-24"
+      }
+    ]
   }
 ]

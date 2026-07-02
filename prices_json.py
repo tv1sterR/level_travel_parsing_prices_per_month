@@ -1,74 +1,79 @@
 import json
 import os
+from datetime import datetime
 
-FILE_PATH = "prices.json"
-
-
-def save_prices(prices):
-    """
-    Сохраняем текущие цены
-    """
-    with open(FILE_PATH, "w", encoding="utf-8") as f:
-        json.dump(prices, f, ensure_ascii=False, indent=2)
+FILE = "prices.json"
 
 
-def load_prices():
-    """
-    Загружаем прошлые цены
-    """
-    if not os.path.exists(FILE_PATH):
+def load_history():
+    if not os.path.exists(FILE):
         return []
 
     try:
-        with open(FILE_PATH, "r", encoding="utf-8") as f:
+        with open(FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # защита от кривого формата
-        if not isinstance(data, list):
-            return []
+        # защита от старого формата
+        if isinstance(data, list):
+            return data
+        return []
 
-        return data
-
-    except Exception:
+    except:
         return []
 
 
-def compare_prices(old_prices, new_prices):
-    """
-    Сравнение цен между запусками
-    """
+def save_history(prices):
+    history = load_history()
 
-    if not old_prices:
-        print("\n🆕 Нет предыдущих данных для сравнения")
-        return
+    snapshot = {
+        "timestamp": datetime.now().isoformat(),
+        "prices": prices
+    }
 
-    old_dict = {item["date"]: item for item in old_prices}
+    history.append(snapshot)
+
+    with open(FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+
+def get_last_snapshot():
+    history = load_history()
+
+    if not history:
+        return None
+
+    last = history[-1]
+
+    # 🔥 защита от битых данных
+    if not isinstance(last, dict):
+        return None
+
+    return last.get("prices", [])
+
+
+def compare_with_last(current_prices):
+    last = get_last_snapshot()
+
+    if not last:
+        return []
+
+    last_map = {x["date"]: x["price"] for x in last if isinstance(x, dict)}
 
     changes = []
 
-    for item in new_prices:
+    for item in current_prices:
         date = item["date"]
 
-        if date in old_dict:
-            old_price = old_dict[date]["price"]
-            new_price = item["price"]
+        if date in last_map:
+            diff = item["price"] - last_map[date]
 
-            if old_price != new_price:
-                diff = new_price - old_price
-
+            if diff != 0:
                 changes.append({
                     "date": date,
-                    "old": old_price,
-                    "new": new_price,
-                    "diff": diff
+                    "old": last_map[date],
+                    "new": item["price"],
+                    "diff": diff,
+                    "url": item["url"]
                 })
 
-    if not changes:
-        print("\n✅ Изменений цен нет")
-        return
-
-    print("\n📊 ИЗМЕНЕНИЯ ЦЕН:")
-
-    for c in changes:
-        sign = "+" if c["diff"] > 0 else ""
-        print(f"{c['date']}: {c['old']} → {c['new']} ({sign}{c['diff']})")
+    return changes

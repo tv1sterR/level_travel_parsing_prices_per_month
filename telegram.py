@@ -6,55 +6,94 @@ class TelegramNotifier:
     def __init__(self, token, chat_id):
         self.token = token
         self.chat_id = chat_id
-        self.url = f"https://api.telegram.org/bot{token}/sendMessage"
+        self.base_url = f"https://api.telegram.org/bot{token}"
 
-    def _send(self, text):
+    # =========================
+    # 📩 ОТПРАВКА СООБЩЕНИЙ
+    # =========================
+    def send_message(self, text: str):
 
+        # Telegram лимит ~4096 символов
+        chunks = [text[i:i + 3500] for i in range(0, len(text), 3500)]
+
+        for chunk in chunks:
+            try:
+                r = requests.post(
+                    f"{self.base_url}/sendMessage",
+                    data={
+                        "chat_id": self.chat_id,
+                        "text": chunk,
+                        "parse_mode": "HTML",
+                        "disable_web_page_preview": True
+                    },
+                    timeout=10
+                )
+
+                if r.status_code != 200:
+                    print("❌ Telegram error:", r.text)
+
+            except Exception as e:
+                print("❌ Telegram exception:", e)
+
+    # =========================
+    # 🖼 ОТПРАВКА ФОТО (ГРАФИК)
+    # =========================
+    def send_photo(self, image_path, caption=None):
         try:
-            requests.post(
-                self.url,
-                data={
-                    "chat_id": self.chat_id,
-                    "text": text,
-                    "parse_mode": "HTML",
-                    "disable_web_page_preview": True
-                },
-                timeout=10
-            )
+            with open(image_path, "rb") as photo:
+                resp = requests.post(
+                    f"{self.base_url}/sendPhoto",
+                    data={
+                        "chat_id": self.chat_id,
+                        "caption": caption or ""
+                    },
+                    files={
+                        "photo": photo
+                    },
+                    timeout=20
+                )
+
+            if not resp.ok:
+                print("Telegram API error:", resp.text)
+
         except Exception as e:
-            print(f"❌ Telegram error: {e}")
+            print("Telegram photo error:", e)
 
-    def send_price_report(self, prices, best, old_best=None):
+    # =========================
+    # 📊 ПОЛНЫЙ ОТЧЁТ
+    # =========================
+    def send_full_report(self, prices, best):
 
-        # ===== 1. ВСЕ ТУРЫ =====
-        msg = "✈️ <b>Отчёт по турам</b>\n\n"
+        # ===== ТОП-5 =====
+        top = sorted(prices, key=lambda x: x["price"])[:5]
 
-        for item in prices:
+        msg = "🔥 <b>ТОП-5 выгодных дат</b>\n\n"
+
+        for i, p in enumerate(top, 1):
             msg += (
-                f"📅 <b>{item['date']}</b>\n"
-                f"💰 {item['price']} ₽\n"
-                f"🔗 {item['url']}\n"
-                f"----------------------\n"
+                f"{i}. 📅 {p['date']} — <b>{p['price']} ₽</b>\n"
             )
 
-        self._send(msg)
+        self.send_message(msg)
 
-        # ===== 2. ЛУЧШАЯ ЦЕНА =====
+        # ===== ВСЕ ЦЕНЫ =====
+        msg = "✈️ <b>Все найденные цены</b>\n\n"
+
+        for p in prices:
+            msg += (
+                f"📅 {p['date']}\n"
+                f"💰 {p['price']} ₽\n"
+                f"🔗 {p['url']}\n\n"
+            )
+
+        self.send_message(msg)
+
+        # ===== ЛУЧШАЯ ЦЕНА =====
         best_msg = (
-            "🔥 <b>Лучшая цена</b>\n\n"
+            "🏆 <b>Лучшая цена</b>\n\n"
             f"📅 {best['date']}\n"
             f"💰 <b>{best['price']} ₽</b>\n"
-            f"🔗 {best['url']}\n"
+            f"🔗 {best['url']}"
         )
 
-        # сравнение с прошлым запуском
-        if old_best:
-            diff = best["price"] - old_best["price"]
-
-            best_msg += (
-                "\n📊 <b>Изменение</b>\n"
-                f"Было: {old_best['price']} ₽\n"
-                f"Разница: {diff:+} ₽\n"
-            )
-
-        self._send(best_msg)
+        self.send_message(best_msg)
