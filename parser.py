@@ -2,6 +2,7 @@ import re
 import time
 import random
 
+from datetime import datetime
 from playwright.sync_api import sync_playwright
 
 
@@ -25,6 +26,7 @@ USER_AGENTS = [
 
 
 def extract_price(text):
+
     digits = re.sub(r"[^\d]", "", text)
 
     if not digits:
@@ -39,22 +41,20 @@ def get_month_prices(urls):
 
     with sync_playwright() as p:
 
-        # по 5 ссылок на один браузер
-        for chunk_start in range(0, len(urls), 5):
+        browser = p.chromium.launch(
+            headless=False,
+            args=[
+                "--disable-blink-features=AutomationControlled"
+            ]
+        )
 
-            chunk = urls[chunk_start:chunk_start + 5]
+        for chunk_start in range(0, len(urls), 10):
+
+            chunk = urls[chunk_start:chunk_start + 10]
 
             print(
                 f"\n========== Пакет "
                 f"{chunk_start + 1}-{chunk_start + len(chunk)} =========="
-            )
-
-            browser = p.chromium.launch(
-                headless=False,
-                slow_mo=random.randint(300, 800),
-                args=[
-                    "--disable-blink-features=AutomationControlled"
-                ]
             )
 
             context = browser.new_context(
@@ -80,17 +80,15 @@ def get_month_prices(urls):
                         timeout=90000
                     )
 
-                    # имитация человека
                     page.mouse.move(
-                        random.randint(100, 500),
-                        random.randint(100, 500)
+                        random.randint(100, 800),
+                        random.randint(100, 600)
                     )
 
                     page.wait_for_timeout(
-                        random.randint(7000, 15000)
+                        random.randint(1500, 3000)
                     )
 
-                    # проверяем отсутствие цены
                     no_price = page.locator(
                         "span.HotelPriceContent_priceTextNoPrice__dfnkt"
                     )
@@ -103,33 +101,59 @@ def get_month_prices(urls):
 
                             print("Нет цены")
 
+                            page.close()
+
+                            pause = random.randint(1500, 4000)
+
+                            print(
+                                f"Ждем {pause / 1000:.1f} сек..."
+                            )
+
+                            time.sleep(pause / 1000)
+
                             continue
 
-                    # основной селектор цены
                     price_locator = page.locator(
                         "span.HotelPriceContent_priceText__UM8xn"
                     ).first
 
                     price_locator.wait_for(
                         state="visible",
-                        timeout=30000
+                        timeout=15000
                     )
 
                     text = price_locator.text_content()
 
                     if not text:
-                        raise Exception("Цена не найдена")
+                        raise Exception(
+                            "Цена не найдена"
+                        )
 
                     price = extract_price(text)
 
+                    def extract_date_from_url(url: str):
+                        try:
+                            # start_date=2026-07-19
+                            import re
+                            match = re.search(r"start_date=(\d{4}-\d{2}-\d{2})", url)
+                            if match:
+                                return match.group(1)
+                        except:
+                            pass
+
+                        return None
+
                     if not price:
-                        raise Exception("Не удалось распарсить цену")
+                        raise Exception(
+                            "Не удалось распарсить цену"
+                        )
 
                     print(f"Цена: {price} ₽")
 
                     results.append({
                         "url": url,
-                        "price": price
+                        "price": price,
+                        "date": extract_date_from_url(url)
                     })
 
                 except Exception as e:
@@ -140,8 +164,7 @@ def get_month_prices(urls):
 
                     page.close()
 
-                # обычная пауза между запросами
-                pause = random.randint(8000, 20000)
+                pause = random.randint(1500, 4000)
 
                 print(
                     f"Ждем {pause / 1000:.1f} сек..."
@@ -149,12 +172,11 @@ def get_month_prices(urls):
 
                 time.sleep(pause / 1000)
 
-            browser.close()
+            context.close()
 
-            # длинная пауза между пакетами
-            if chunk_start + 5 < len(urls):
+            if chunk_start + 10 < len(urls):
 
-                big_pause = random.randint(30, 60)
+                big_pause = random.randint(10, 20)
 
                 print(
                     f"\nПауза между пакетами "
@@ -162,5 +184,7 @@ def get_month_prices(urls):
                 )
 
                 time.sleep(big_pause)
+
+        browser.close()
 
     return results

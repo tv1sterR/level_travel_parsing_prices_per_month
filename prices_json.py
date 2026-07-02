@@ -1,40 +1,74 @@
 import json
+import os
 
-FILE = "prices.json"
+FILE_PATH = "prices.json"
 
 
-def save_prices(data):
-    with open(FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def save_prices(prices):
+    """
+    Сохраняем текущие цены
+    """
+    with open(FILE_PATH, "w", encoding="utf-8") as f:
+        json.dump(prices, f, ensure_ascii=False, indent=2)
 
 
 def load_prices():
+    """
+    Загружаем прошлые цены
+    """
+    if not os.path.exists(FILE_PATH):
+        return []
+
     try:
-        with open(FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
+        with open(FILE_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        # защита от кривого формата
+        if not isinstance(data, list):
+            return []
+
+        return data
+
+    except Exception:
         return []
 
 
-def compare_prices(old, new):
-    if not old:
-        print("\n📦 Нет прошлых данных для сравнения")
+def compare_prices(old_prices, new_prices):
+    """
+    Сравнение цен между запусками
+    """
+
+    if not old_prices:
+        print("\n🆕 Нет предыдущих данных для сравнения")
         return
 
-    old_map = {x["url"]: x["price"] for x in old}
+    old_dict = {item["date"]: item for item in old_prices}
 
-    print("\n========================")
-    print("ИЗМЕНЕНИЯ ЦЕН")
-    print("========================")
+    changes = []
 
-    for item in new:
-        url = item["url"]
-        price = item["price"]
+    for item in new_prices:
+        date = item["date"]
 
-        if url in old_map:
-            diff = price - old_map[url]
+        if date in old_dict:
+            old_price = old_dict[date]["price"]
+            new_price = item["price"]
 
-            if diff != 0:
-                sign = "+" if diff > 0 else ""
-                print(f"{url}")
-                print(f"{old_map[url]} → {price} ({sign}{diff})\n")
+            if old_price != new_price:
+                diff = new_price - old_price
+
+                changes.append({
+                    "date": date,
+                    "old": old_price,
+                    "new": new_price,
+                    "diff": diff
+                })
+
+    if not changes:
+        print("\n✅ Изменений цен нет")
+        return
+
+    print("\n📊 ИЗМЕНЕНИЯ ЦЕН:")
+
+    for c in changes:
+        sign = "+" if c["diff"] > 0 else ""
+        print(f"{c['date']}: {c['old']} → {c['new']} ({sign}{c['diff']})")
